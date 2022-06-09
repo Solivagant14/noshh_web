@@ -3,3 +3,5 @@ env
 test.py
 .temp
 noshh_vids
+progress
+app/__pycache__
