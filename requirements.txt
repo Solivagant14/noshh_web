@@ -1,0 +1,17 @@
+certifi==2022.5.18.1
+charset-normalizer==2.0.9
+decorator==4.4.2
+idna==3.3
+imageio==2.19.3
+imageio-ffmpeg==0.4.7
+moviepy==1.0.3
+mutagen==1.45.1
+numpy==1.22.4
+Pillow==9.1.1
+proglog==0.1.9
+pycryptodomex==3.14.1
+requests==2.27.1
+tqdm==4.64.0
+urllib3==1.26.9
+websockets==10.3
+yt-dlp==2021.12.27
