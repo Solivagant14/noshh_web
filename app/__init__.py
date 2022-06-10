@@ -2,7 +2,7 @@ import random
 import string
 import json
 
-with open("progress.json", "w") as jsonFile:
+with open("progress/progress.json", "w") as jsonFile:
     data = {
         "download":0,
         "audio":0,
