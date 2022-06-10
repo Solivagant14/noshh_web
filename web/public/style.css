@@ -38,3 +38,11 @@ input[type="text"]:focus{
     color: var(--black);
     box-shadow: 0 1px 1px var(--white) inset, 0 0 8px var(--grey3);
 }
+
+h2{
+    color: #F2F2F2;
+}
+
+p{
+    color: #F2F2F2;
+}
