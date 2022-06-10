@@ -8,7 +8,7 @@ const path = require('path')
 var fs = require('fs');
 var exec = require('child_process').exec;
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'web/public')));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/web/index.html');

@@ -1,0 +1,40 @@
+:root {
+    --black: #0D0D0D;
+    --grey1: #262626;
+    --grey2: #737373;
+    --grey3: #A6A6A6;
+    --white: #F2F2F2;
+  }
+
+body{
+    height: 100vh;
+    background-color: var(--grey1);
+} 
+.container{
+    height: 100%;
+}
+
+.btn{
+    background-color: var(--grey3);
+    border: none;
+    color: var(--black);
+}
+
+.btn:hover{
+    background-color: var(--black);
+    color: var(--white);
+    box-shadow: 0 1px 1px var(--black) inset, 0 0 8px var(--grey2);
+}
+
+input[type="text"]{
+    border: none;
+    background-color: var(--white);
+    color: var(--black);
+}
+
+input[type="text"]:focus{
+    border: none;
+    background-color: var(--white);
+    color: var(--black);
+    box-shadow: 0 1px 1px var(--white) inset, 0 0 8px var(--grey3);
+}
