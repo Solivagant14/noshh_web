@@ -15,7 +15,6 @@
 <body>
     <div class="container d-flex flex-column align-items-center justify-content-center">
         <h2 class="p-3" id="process">Getting things Ready....</h2>
-        <!-- <p id="percentage"></p> -->
         <div id="download-progress-bar" class="progress w-75" style="height: 25px; display:none;">
             <div class="progress-bar bg-info" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
@@ -67,8 +66,6 @@
             var bar = $(".progress-bar");
             bar.attr("aria-valuenow", percentage);
             bar.css("width", percentage + "%");
-
-            // document.getElementById("percentage").innerHTML = percentage;
 
             if (process == 'Done') {
                 $('#download-progress-bar').css("display", "none");
