@@ -46,19 +46,19 @@
             document.getElementById("process").innerHTML = process;
 
             if (process == 'download') {
-                document.getElementById("process").innerHTML = "Getting the Video";
+                document.getElementById("process").innerHTML = "Getting the Video ("+percentage+"%)";
                 $('#download-progress-bar').css("display", "flex");
                 $('#audio-progress-bar').css("display", "none");
                 $('#video-progress-bar').css("display", "none");
             }
             if (process == 'audio') {
-                document.getElementById("process").innerHTML = "Processing the Audio";
+                document.getElementById("process").innerHTML = "Processing the Audio ("+percentage+"%)";
                 $('#download-progress-bar').css("display", "none");
                 $('#audio-progress-bar').css("display", "flex");
                 $('#video-progress-bar').css("display", "none");           
             }
             if (process == 'video') {
-                document.getElementById("process").innerHTML = "Processing the Video";
+                document.getElementById("process").innerHTML = "Processing the Video ("+percentage+"%)";
                 $('#download-progress-bar').css("display", "none");
                 $('#audio-progress-bar').css("display", "none");
                 $('#video-progress-bar').css("display", "flex");            
