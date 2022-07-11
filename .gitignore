@@ -1,8 +1,2 @@
-node_modules
-env
-test.py
 .temp
-noshh_vids
-app/__pycache__
-progress/progress.json
-test.js
+progress.json

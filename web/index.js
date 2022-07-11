@@ -8,26 +8,41 @@ const path = require('path')
 var fs = require('fs');
 var exec = require('child_process').exec;
 
-app.use(express.static(path.join(__dirname, 'web/public')));
+app.use(express.static(path.join(__dirname, 'pages/public')));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/web/index.html');
+    res.sendFile(__dirname + '/pages/index.html');
 });
 
 app.get('/progress', (req, res) => {
-    exec("env/bin/python noshh.py " + req.query.link, (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-    });
+    async function doAsyncTask() {
+        const url = (
+          'http://127.0.0.1:5000/?' +
+          new URLSearchParams({ 'url' :  req.query.link}).toString()
+        );
+      
+        const result = await fetch(url)
+          .then(response => response.json());
+      
+        console.log('Fetched from: ' + url);
+        console.log(result);
+      }
+      
+      doAsyncTask();
 
-    res.sendFile(__dirname + '/web/progress.html');
+    // exec("env/bin/python noshh.py " + req.query.link, (error, stdout, stderr) => {
+    //     if (error) {
+    //         console.log(`error: ${error.message}`);
+    //         return;
+    //     }
+    //     if (stderr) {
+    //         console.log(`stderr: ${stderr}`);
+    //         return;
+    //     }
+    //     console.log(`stdout: ${stdout}`);
+    // });
+
+    res.sendFile(__dirname + '/pages/progress.html');
 
     var previous = null;
     var current = null;
@@ -37,7 +52,7 @@ app.get('/progress', (req, res) => {
     io.on('connection', (socket) => {
         operation = () => {
             try {
-                dataFile = JSON.parse(fs.readFileSync('./progress/progress.json'));
+                dataFile = JSON.parse(fs.readFileSync('./progress.json'));
                 current = JSON.stringify(dataFile);
             } catch (err) {}
 
@@ -58,7 +73,7 @@ app.get('/progress', (req, res) => {
 });
 
 app.get("/video", function(req, res) {
-    res.sendFile(__dirname + "/web/video.html");
+    res.sendFile(__dirname + "/pages/video.html");
 });
 
 app.get("/videostream", function(req, res) {

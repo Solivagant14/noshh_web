@@ -1,8 +1,10 @@
-import random
-import string
 import json
 
-with open("progress/progress.json", "w") as jsonFile:
+JSON_FILE = "progress.json"
+with open(JSON_FILE, 'w') as f:
+    print("The json file is created")
+
+with open(JSON_FILE, "w") as jsonFile:
     data = {
         "download":0,
         "audio":0,

@@ -15,3 +15,4 @@ tqdm==4.64.0
 urllib3==1.26.9
 websockets==10.3
 yt-dlp==2021.12.27
+Flask==2.1.2
