@@ -4,6 +4,7 @@ import subprocess
 from app.progress import progress
 from moviepy.editor import VideoFileClip, concatenate_videoclips
 from proglog import ProgressBarLogger
+from app.progress import progress
 
 #logger class which gives access to read the terminal output of moviepy
 class MyBarLogger(ProgressBarLogger):
@@ -25,7 +26,7 @@ def remove_silence(in_file,out_file):
     out_file = out_file
 
     def generate_timestamps():
-        command = "sh script/detect_silence.sh {}".format(in_file)
+        command = "ffmpeg -hide_banner -vn -i {} -af 'silencedetect=n=-35dB:d=0.2' -f null - 2>&1 | grep 'silencedetect' | awk '{{print $NF}}' ".format(in_file)
         output = subprocess.run(command, shell=True, capture_output=True, text=True)
         return output.stdout.split('\n')[:-1]
 
@@ -70,3 +71,4 @@ def remove_silence(in_file,out_file):
 
     video.close()
     os.remove(in_file)
+    progress(process="Done")
