@@ -10,12 +10,12 @@ app = Flask(__name__)
 def url():
     url = str(request.args.get('url'))  # /?url=URL
     # print(url)#parse_qs(urlparse(url).query)['v'][0])
-    download(url,'.temp/'+url[-5:])
+    # download(url,'.temp/'+url[-5:])
     runner = Execute(url)
     runner.run()
-    # with open(JSON_FILE, "r") as jsonFile:
-    #         data = json.loads(jsonFile.read())
-    return "data"
+    with open(runner.JSON_FILE, "r") as jsonFile:
+            data = json.loads(jsonFile.read())
+    return data
 
 if __name__ == '__main__':
     app.run()
