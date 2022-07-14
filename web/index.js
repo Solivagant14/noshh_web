@@ -6,7 +6,9 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const path = require('path')
 var fs = require('fs');
-var exec = require('child_process').exec;
+var video = 'jyptu'
+
+// var exec = require('child_process').exec;
 
 app.use(express.static(path.join(__dirname, 'pages/public')));
 
@@ -52,7 +54,7 @@ app.get('/progress', (req, res) => {
     io.on('connection', (socket) => {
         operation = () => {
             try {
-                dataFile = JSON.parse(fs.readFileSync('./progress.json'));
+                dataFile = JSON.parse(fs.readFileSync(`./${video}_progress.json`));
                 current = JSON.stringify(dataFile);
             } catch (err) {}
 
@@ -86,7 +88,8 @@ app.get("/videostream", function(req, res) {
     }
 
     // get video stats (about 61MB)
-    const videoPath = "noshh_vids/video.webm";
+    let str = 'video'
+    const videoPath = `noshh_vids/${str}.webm`;
     const videoSize = fs.statSync(videoPath).size;
 
     // Parse Range

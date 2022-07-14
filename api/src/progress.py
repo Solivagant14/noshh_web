@@ -1,10 +1,8 @@
 import json
 
-from app import JSON_FILE
-
 #function to assign the values to json file
-def progress(percentage=0, process=None):
-    with open(JSON_FILE, "r") as jsonFile:
+def progress(percentage=0, process=None, json_file=''):
+    with open(json_file, "r") as jsonFile:
         data = json.loads(jsonFile.read())
 
     match process:
@@ -21,5 +19,5 @@ def progress(percentage=0, process=None):
 
     data["process"] = process
 
-    with open(JSON_FILE, "w") as jsonFile:
+    with open(json_file, "w") as jsonFile:
         json.dump(data, jsonFile,indent=4)
