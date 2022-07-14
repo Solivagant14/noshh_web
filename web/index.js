@@ -6,9 +6,12 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const path = require('path')
 var fs = require('fs');
-var video = 'jyptu'
 
-// var exec = require('child_process').exec;
+app.set('view engine', 'ejs');
+
+function uid(link){
+    return link.slice(-11)
+}
 
 app.use(express.static(path.join(__dirname, 'pages/public')));
 
@@ -32,19 +35,9 @@ app.get('/progress', (req, res) => {
       
       doAsyncTask();
 
-    // exec("env/bin/python noshh.py " + req.query.link, (error, stdout, stderr) => {
-    //     if (error) {
-    //         console.log(`error: ${error.message}`);
-    //         return;
-    //     }
-    //     if (stderr) {
-    //         console.log(`stderr: ${stderr}`);
-    //         return;
-    //     }
-    //     console.log(`stdout: ${stdout}`);
-    // });
+    video = uid(req.query.link)
 
-    res.sendFile(__dirname + '/pages/progress.html');
+    res.render('progress', {video:video});
 
     var previous = null;
     var current = null;
@@ -54,7 +47,7 @@ app.get('/progress', (req, res) => {
     io.on('connection', (socket) => {
         operation = () => {
             try {
-                dataFile = JSON.parse(fs.readFileSync(`./${video}_progress.json`));
+                dataFile = JSON.parse(fs.readFileSync(`./progress/${video}_progress.json`));
                 current = JSON.stringify(dataFile);
             } catch (err) {}
 
@@ -74,8 +67,8 @@ app.get('/progress', (req, res) => {
     });
 });
 
-app.get("/video", function(req, res) {
-    res.sendFile(__dirname + "/pages/video.html");
+app.get("/watch", function(req, res) {
+    res.render('video', {video:req.query.v});
 });
 
 app.get("/videostream", function(req, res) {
@@ -88,8 +81,7 @@ app.get("/videostream", function(req, res) {
     }
 
     // get video stats (about 61MB)
-    let str = 'video'
-    const videoPath = `noshh_vids/${str}.webm`;
+    const videoPath = `noshh_vids/${req.query.v}.webm`;
     const videoSize = fs.statSync(videoPath).size;
 
     // Parse Range
